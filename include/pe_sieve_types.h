@@ -143,6 +143,7 @@ namespace pesieve {
 		t_results_filter results_filter; ///< what type of results should be included in the report
 		char output_dir[MAX_PATH + 1];  ///< the root directory where the output should be saved (default: current directory)
 		PARAM_STRING modules_ignored; ///< a list of modules that will not be scanned, separated by PARAM_LIST_SEPARATOR
+		PARAM_STRING modules_forced; ///< a list of modules that wll be forcefully scanned and dumped, separated by PARAM_LIST_SEPARATOR
 		PARAM_STRING pattern_file; ///< a file with additional patterns for code recognition
 	} t_params;
 

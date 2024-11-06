@@ -8,6 +8,11 @@ void pesieve::params_fields_to_JSON(pesieve::t_params& params, std::stringstream
 		OUT_PADDED(outs, level, "\"modules_ignored\" : ");
 		outs << "\"" << params.modules_ignored.buffer << "\"" << ",\n";
 	}
+	if (params.modules_forced.length && params.modules_forced.buffer) {
+		OUT_PADDED(outs, level, "\"modules_forced\" : ");
+		outs << "\"" << params.modules_forced.buffer << "\"" << ",\n";
+	}
+
 	if (params.data) {
 		OUT_PADDED(outs, level, "\"data\" : ");
 		outs << std::dec << params.data << ",\n";

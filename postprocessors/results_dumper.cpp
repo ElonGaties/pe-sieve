@@ -220,7 +220,7 @@ pesieve::ProcessDumpReport* pesieve::ResultsDumper::dumpDetectedModules(
 		++itr)
 	{
 		ModuleScanReport* mod = *itr;
-		if (mod->status != SCAN_SUSPICIOUS) {
+		if (mod->status != SCAN_SUSPICIOUS && mod->status != SCAN_MANUAL) {
 			continue;
 		}
 		// skip already dumped:

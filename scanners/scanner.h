@@ -55,6 +55,7 @@ namespace pesieve {
 		pesieve::t_params args;
 
 		std::set<std::string> ignoredModules;
+		std::set<std::string> forcedModules;
 	};
 
 }; //namespace pesieve

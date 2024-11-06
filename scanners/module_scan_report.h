@@ -18,7 +18,8 @@ namespace pesieve {
 	typedef enum module_scan_status {
 		SCAN_ERROR = -1,
 		SCAN_NOT_SUSPICIOUS = 0,
-		SCAN_SUSPICIOUS = 1
+		SCAN_SUSPICIOUS = 1,
+		SCAN_MANUAL = 2
 	} t_scan_status;
 
 	//!  A base class of all the reports detailing on the output of the performed module's scan.

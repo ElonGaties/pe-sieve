@@ -19,6 +19,7 @@ using namespace pesieve;
 #define PARAM_MODULES_IGNORE "mignore"
 #define PARAM_REFLECTION "refl"
 #define PARAM_DOTNET_POLICY "dnet"
+#define PARAM_MANUAL "manual"
 
 //dump options:
 #define PARAM_IMP_REC "imp"
@@ -153,6 +154,16 @@ public:
 			}
 		}
 
+		//PARAM_MANUAL_MODULES
+		this->addParam(new StringListParam(PARAM_MANUAL, false, PARAM_LIST_SEPARATOR));
+		{
+			std::stringstream ss1;
+			ss1 << "Forcefully scan module/s with given nane/s";
+			std::stringstream ss2;
+			ss2 << INFO_SPACER << "Example: kernel32.dll" << PARAM_LIST_SEPARATOR << "user32.dll";
+			this->setInfo(PARAM_MANUAL, ss1.str(), ss2.str());
+		}
+
 		//PARAM_THREADS
 		this->addParam(new BoolParam(PARAM_THREADS, false));
 		this->setInfo(PARAM_THREADS, "Scan threads' callstack. Detect shellcodes, incl. 'sleeping beacons'.");
@@ -234,6 +245,7 @@ public:
 		this->addParamToGroup(PARAM_OBFUSCATED, str_group);
 		this->addParamToGroup(PARAM_THREADS, str_group);
 		this->addParamToGroup(PARAM_PATTERN, str_group);
+		this->addParamToGroup(PARAM_MANUAL, str_group);
 
 		str_group = "4. dump options";
 		this->addGroup(new ParamGroup(str_group));
@@ -275,6 +287,7 @@ public:
 		copyVal<EnumParam>(PARAM_RESULTS_FILTER, ps.results_filter);
 
 		fillStringParam(PARAM_MODULES_IGNORE, ps.modules_ignored);
+		fillStringParam(PARAM_MANUAL, ps.modules_forced);
 		copyVal<BoolParam>(PARAM_REBASE, ps.rebase);
 		copyVal<BoolParam>(PARAM_QUIET, ps.quiet);
 		copyVal<BoolParam>(PARAM_JSON, ps.json_output);

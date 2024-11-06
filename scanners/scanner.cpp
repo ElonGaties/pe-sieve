@@ -84,8 +84,12 @@ pesieve::ProcessScanner::ProcessScanner(HANDLE procHndl, bool is_reflection, pes
 	args(_args)
 {
 	symbols.InitSymbols(this->processHandle);
+
 	if (validate_param_str(args.modules_ignored)) {
 		pesieve::util::string_to_list(args.modules_ignored.buffer, PARAM_LIST_SEPARATOR, ignoredModules);
+	}
+	if (validate_param_str(args.modules_forced)) {
+		pesieve::util::string_to_list(args.modules_forced.buffer, PARAM_LIST_SEPARATOR, forcedModules);
 	}
 }
 
@@ -414,6 +418,10 @@ size_t pesieve::ProcessScanner::scanModules(ProcessScanReport &pReport)  //throw
 		if (is_hollowed == SCAN_NOT_SUSPICIOUS) {
 			//if the content does not differ, ignore the different name of the mapped file
 			mappingScanReport->status = SCAN_NOT_SUSPICIOUS;
+		}
+
+		if (is_in_list(plainName, this->forcedModules)) {
+			mappingScanReport->status = SCAN_MANUAL;
 		}
 
 		// the module is not hollowed, so we can add it to the exports lookup:
